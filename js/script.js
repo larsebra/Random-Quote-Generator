@@ -81,7 +81,7 @@ function unWhatchedQuotesInit(){
 function getRandomValueFromArray(array){
   var randomNumber = Math.floor(array.length * Math.random()); /*Find a random number in the index range*/
   randomNumber = array.splice(randomNumber, 1);/*Array is returned from the splice method, should only return 1 value. Returning that value. Splice removes a item from an array*/
-  console.log(randomNumber[0]);
+  //console.log(randomNumber[0]);
   return randomNumber[0];
 }
 
@@ -93,10 +93,10 @@ function getRandomValueFromArray(array){
 function getRandomQuote(quotes){
   if(!unWatchedQuotes || unWatchedQuotes.length === 0){ // reInit the whatchedArray when all quotes has been whatched.
     unWhatchedQuotesInit();
-    console.log(unWatchedQuotes.join(", "));
+    //console.log(unWatchedQuotes.join(", "));
   }
   var randomNumber = getRandomValueFromArray(unWatchedQuotes);
-  console.log(quotes[randomNumber]);
+  //console.log(quotes[randomNumber]);
   return quotes[randomNumber];
 }
 
@@ -125,7 +125,7 @@ document.getElementById('loadQuote').addEventListener("click", () => {
 function setTime(){
   //Set timeout
   if(timeID !== undefined || timeID !== null){//If time is not null or undefined clear the timout variable.
-    console.log("interval cleared!");
+    //console.log("interval cleared!");
     clearInterval(timeID);
   }
   timeID = window.setInterval(printQuote, timeOut);
