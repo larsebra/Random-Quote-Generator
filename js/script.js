@@ -10,35 +10,40 @@ var quotes = [
     source: "Oscar Wilde",
     citation: "NVS",
     year: "1885",
-    tags:["Life in general"]
+    tags:["Life in general"],
+    color:"navy"
   },
   {
     quote: `Good, better, best. Never let it rest. Til your good is better and your better is best`,
     source: "ST. Jerome",
     citation: "NVS",
     year: "390 AD.",
-    tags:["Life in general"]
+    tags:["Life in general"],
+    color:"#36b55c"
   },
   {
     quote: `Failure isn’t fatal, but failure to change might be`,
     source: "John Wooden",
     citation: "Forbes",
     year: "1971",
-    tags:["Business", "Failure", "Motivation"]
+    tags:["Business", "Failure", "Motivation"],
+    color:"lightslategray"
   },
   {
     quote: `Only those who dare to fail greatly can ever achieve greatly`,
     source: " Robert F. Kennedy",
     citation: "Forbes",
     year: "1960",
-    tags:["Business", "Failure", "Motivation", "Forbes"]
+    tags:["Business", "Failure", "Motivation", "Forbes"],
+    color:"orange"
   },
   {
     quote: `Giving up is the only sure way to fail`,
     source: "Gena Showalter",
     citation: "Forbes",
     year: "2006",
-    tags:["Business", "Failure", "Motivation", "Forbes"]
+    tags:["Business", "Failure", "Motivation", "Forbes"],
+    color:"pink"
   },
   {
     quote: `Failure should be our teacher, not our undertaker.
@@ -47,7 +52,8 @@ var quotes = [
     source: "Denis Waitley",
     citation: "Forbes",
     year: "1990's",
-    tags:["Failure", "Motivation"]
+    tags:["Failure", "Motivation"],
+    color:"maroon"
   }
 ];
 
@@ -79,10 +85,24 @@ function unWhatchedQuotesInit(){
    return: a random number value from the given array.
 */
 function getRandomValueFromArray(array){
-  var randomNumber = Math.floor(array.length * Math.random()); /*Find a random number in the index range*/
+  var randomNumber = getRandomValueInRange(0, array.length); /*Find a random number in the index range*/
   randomNumber = array.splice(randomNumber, 1);/*Array is returned from the splice method, should only return 1 value. Returning that value. Splice removes a item from an array*/
-  //console.log(randomNumber[0]);
+  console.log(randomNumber[0]);
   return randomNumber[0];
+}
+
+/* name: getRandomValueInRange, type: function
+   info: Calculates  a random value in the range min and max, including min, but not max.
+   parameters: min, the minimum nuber in range.
+               max, the max number in the range.
+   return: random value in the range, including min but not max. If min === max, max is returned.
+*/
+function getRandomValueInRange(min, max){
+  if(max === min){
+    return max;
+  }
+  var randomValue = (max - min) * Math.random() + min;
+  return  Math.floor(randomValue);
 }
 
 /* name: getRandomQuote(quotes), type: function
@@ -111,6 +131,7 @@ function printQuote(){
       </p>
       <p class="tags"><span class="tag">${quote.tags.join(", ")}</span><p>
     `;
+    document.body.style.backgroundColor = `rgb(${getRandomValueInRange(0, 256)},${getRandomValueInRange(0, 256)},${getRandomValueInRange(0, 256)})`;
 }
 
 // when user clicks anywhere on the button, the "printQuote" function is called
@@ -119,8 +140,8 @@ document.getElementById('loadQuote').addEventListener("click", () => {
   setTime();
 }, false);
 
-/* name: timeOut, type: function
-   info: Resets the timer.
+/* name: setTime(), type: function initing and reseting time.
+   info: Resets the timer interval.
 */
 function setTime(){
   //Set timeout
